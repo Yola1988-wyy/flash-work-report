@@ -1,0 +1,54 @@
+<!--
+  60-team.html · 团队/方法论(双栏卡片,grid-2)
+  适用:2 类(A/B)各 2~3 条文字要点,如团队成长 + 专业能力 / 经验 + 方法
+
+  必填 TOKEN:
+    {{BRAND_TEXT}}/{{PERIOD}}/{{DATA_TITLE}}/{{SNUM}}/{{H_PREFIX}}/{{H_HL}}/{{KICKER}}
+                            同 20 模板。本模板无 {{TAGS}}
+
+    左卡(类 A):
+    {{A_IX}}                左上角字母徽章。例:"A"
+    {{A_TAG}}               徽章右侧小字。例:"团队成长"
+    {{A_TITLE}}             大标题。例:"团队成长"
+    {{A_ITEMS_HTML}}        条目列表(2~3 条),每条用以下结构:
+                            <div class="team-item">
+                              <div class="n">01</div>
+                              <div class="b">正文,<b>关键词</b> 高亮(黄绿底)。</div>
+                            </div>
+
+    右卡(类 B):同 A,字段前缀换 B_
+
+  排版规则:
+    - 每条 .b 内可用 <b>...</b> 包裹关键词,会渲染为黄绿底高亮
+    - .n 必须用 2 位数字 "01"/"02"/"03",font-family 是 Sora
+-->
+<section class="slide bg-light" data-title="{{DATA_TITLE}}">
+  <div class="slide-inner">
+    <div class="chrome-top"><div class="brand"><span class="dot"></span>{{BRAND_TEXT}}</div><div>{{PERIOD}}</div></div>
+
+    <div class="shead">
+      <div class="accent"></div>
+      <div>
+        <div class="snum au">{{SNUM}}</div>
+        <h2 class="au">{{H_PREFIX}}<span class="hl">{{H_HL}}</span></h2>
+        <div class="kicker au">{{KICKER}}</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card team-card au1">
+        <div class="team-tag"><span class="ix">{{A_IX}}</span>{{A_TAG}}</div>
+        <div class="team-title">{{A_TITLE}}</div>
+        {{A_ITEMS_HTML}}
+      </div>
+
+      <div class="card team-card au2">
+        <div class="team-tag"><span class="ix">{{B_IX}}</span>{{B_TAG}}</div>
+        <div class="team-title">{{B_TITLE}}</div>
+        {{B_ITEMS_HTML}}
+      </div>
+    </div>
+
+    <div class="chrome-bot"><span></span><span>-- / --</span></div>
+  </div>
+</section>

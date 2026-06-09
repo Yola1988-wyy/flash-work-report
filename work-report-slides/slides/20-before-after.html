@@ -1,0 +1,70 @@
+<!--
+  20-before-after.html · 前后对比(指标 stack + 拖拽对比图,grid-ba 布局)
+  适用:有改善幅度指标 + 优化前后截图;强调对比效果
+
+  必填 TOKEN:
+    {{BRAND_TEXT}}/{{PERIOD}}/{{DATA_TITLE}}/{{SNUM}}/{{H_PREFIX}}/{{H_HL}}/{{KICKER}}
+                            同 10 模板。{{KICKER}} 为副标题小字,可留空
+    {{TAGS}}                标签 HTML 片段。例:'<span class="tag solid">优化体验</span>'
+                            可串多个;不需要时填空字符串
+
+    指标卡(3 张,从上到下):
+    {{M1_VAL}}/{{M1_UNIT}}/{{M1_LBL}}/{{M1_NOTE}}  第 1 张(深底黄字 accent)
+        例:M1_VAL="−20", M1_UNIT="%", M1_LBL="请假率降低"
+    {{M2_VAL}}/{{M2_UNIT}}/{{M2_LBL}}/{{M2_NOTE}}  第 2 张(白底)
+    {{M3_LBL}}/{{M3_NOTE}}                          第 3 张(浅黄底,结论卡;只有标签 + 文字)
+
+    前后对比图(必须使用 assets/before.png 和 assets/after.png,或自定义路径):
+    {{BA_BEFORE_SRC}}       优化前图片路径。例:"assets/before.png"
+    {{BA_AFTER_SRC}}        优化后图片路径。例:"assets/after.png"
+    {{BA_TITLE}}            对比卡片标题。例:"优化前后对比"
+
+  注意:整个 deck 中此 slide 最多出现 1 次(因为 baSlider IIFE 用固定 ID #baSlider)。
+-->
+<section class="slide bg-light" data-title="{{DATA_TITLE}}">
+  <div class="slide-inner">
+    <div class="chrome-top"><div class="brand"><span class="dot"></span>{{BRAND_TEXT}}</div><div>{{PERIOD}}</div></div>
+
+    <div class="shead">
+      <div class="accent"></div>
+      <div>
+        <div class="snum au">{{SNUM}}</div>
+        <h2 class="au">{{H_PREFIX}}<span class="hl">{{H_HL}}</span></h2>
+        <div class="kicker au">{{KICKER}}</div>
+      </div>
+      <div class="tags au1">{{TAGS}}</div>
+    </div>
+
+    <div class="grid-ba">
+      <div class="mstack">
+        <div class="metric-card accent au1">
+          <div class="v">{{M1_VAL}}<span class="u">{{M1_UNIT}}</span></div>
+          <div class="l">{{M1_LBL}}</div>
+          <div class="n">{{M1_NOTE}}</div>
+        </div>
+        <div class="metric-card au2">
+          <div class="v">{{M2_VAL}}<span class="u">{{M2_UNIT}}</span></div>
+          <div class="l">{{M2_LBL}}</div>
+          <div class="n">{{M2_NOTE}}</div>
+        </div>
+        <div class="metric-card au3" style="background:#FFFCE6;border-color:var(--yellow-deep)">
+          <div class="l">{{M3_LBL}}</div>
+          <div class="n" style="color:#5a5340;font-size:13.5px;margin-top:8px;line-height:1.55">{{M3_NOTE}}</div>
+        </div>
+      </div>
+
+      <div class="card au2" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+        <div class="card-h" style="padding:20px 24px 0;margin-bottom:14px"><span class="t">{{BA_TITLE}}</span><span class="m">拖动 ⇄ 滑块 · 双击放大</span></div>
+        <div class="ba-slider fade" id="baSlider" data-before-src="{{BA_BEFORE_SRC}}" data-after-src="{{BA_AFTER_SRC}}" style="border:none;border-radius:0;flex:1;box-shadow:none">
+          <img class="ba-img zoomable" src="{{BA_BEFORE_SRC}}" alt="优化前" draggable="false">
+          <img class="ba-img after-clip zoomable" src="{{BA_AFTER_SRC}}" alt="优化后" draggable="false" id="afterImg">
+          <span class="ba-label before">优化前</span>
+          <span class="ba-label after">优化后</span>
+          <div class="ba-handle" id="baHandle"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot"><span></span><span>-- / --</span></div>
+  </div>
+</section>
