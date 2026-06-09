@@ -1,0 +1,81 @@
+<!--
+  40-util-bars.html · 多月对比(指标 stack + 月度分组柱状,grid-util 布局)
+  适用:2~3 个核心指标 + 同对象多月/多期分项对比
+
+  必填 TOKEN:
+    {{BRAND_TEXT}}/{{PERIOD}}/{{DATA_TITLE}}/{{SNUM}}/{{H_PREFIX}}/{{H_HL}}/{{KICKER}}/{{TAGS}}
+                            同 20 模板
+
+    指标卡(2 张):
+    {{M1_VAL}}/{{M1_UNIT}}/{{M1_LBL}}/{{M1_NOTE}}  第 1 张(深底黄字 accent)
+    {{M2_VAL}}/{{M2_UNIT}}/{{M2_LBL}}/{{M2_NOTE}}  第 2 张(白底)
+                            UNIT 较长时(如"人天/月")在 unit span 加 style="font-size:.4em"
+
+    柱状卡:
+    {{BAR_TITLE}}           标题。例:"支付方式对比"
+    {{BAR_META}}            右侧 meta。例:"2026 年 2 月 → 3 月"
+    分组行(默认 3 行,每行 2 根柱:前期 + 后期):
+    {{ROW_N_LBL}}           行标签(N=1/2/3)
+    {{ROW_N_PREV_LBL}}      前期标签。例:"2月"
+    {{ROW_N_PREV_PCT}}      前期柱宽 %(0~100,相对最大值)
+    {{ROW_N_PREV_VAL}}      前期数值
+    {{ROW_N_CURR_LBL}}      后期标签。例:"3月"
+    {{ROW_N_CURR_PCT}}      后期柱宽 %(0~100)
+    {{ROW_N_CURR_VAL}}      后期数值
+    {{ROW_N_DELTA}}         同比增量。例:"+19%"
+
+  计算规则:在所有行的 PREV/CURR 数值中找最大值 M,每根柱的 PCT = 数值/M*100。
+-->
+<section class="slide bg-light" data-title="{{DATA_TITLE}}">
+  <div class="slide-inner">
+    <div class="chrome-top"><div class="brand"><span class="dot"></span>{{BRAND_TEXT}}</div><div>{{PERIOD}}</div></div>
+
+    <div class="shead">
+      <div class="accent"></div>
+      <div>
+        <div class="snum au">{{SNUM}}</div>
+        <h2 class="au">{{H_PREFIX}}<span class="hl">{{H_HL}}</span></h2>
+        <div class="kicker au">{{KICKER}}</div>
+      </div>
+      <div class="tags au1">{{TAGS}}</div>
+    </div>
+
+    <div class="grid-util">
+      <div class="mstack">
+        <div class="metric-card accent au1">
+          <div class="v">{{M1_VAL}}<span class="u">{{M1_UNIT}}</span></div>
+          <div class="l">{{M1_LBL}}</div>
+          <div class="n">{{M1_NOTE}}</div>
+        </div>
+        <div class="metric-card au2">
+          <div class="v">{{M2_VAL}}<span class="u">{{M2_UNIT}}</span></div>
+          <div class="l">{{M2_LBL}}</div>
+          <div class="n">{{M2_NOTE}}</div>
+        </div>
+      </div>
+
+      <div class="card au3">
+        <div class="card-h"><span class="t">{{BAR_TITLE}}</span><span class="m">{{BAR_META}}</span></div>
+        <div class="gbars">
+          <div class="gbar-row">
+            <div class="gl">{{ROW_1_LBL}}</div>
+            <div class="gbar feb"><div class="barwrap"><div class="track"></div><div class="fill" data-w="{{ROW_1_PREV_PCT}}" style="--i:0"><span class="mtag">{{ROW_1_PREV_LBL}}</span></div></div><span class="vlbl">{{ROW_1_PREV_VAL}}</span></div>
+            <div class="gbar mar"><div class="barwrap"><div class="track"></div><div class="fill" data-w="{{ROW_1_CURR_PCT}}" style="--i:1"><span class="mtag">{{ROW_1_CURR_LBL}}</span></div></div><span class="vlbl">{{ROW_1_CURR_VAL}}<span class="delta">{{ROW_1_DELTA}}</span></span></div>
+          </div>
+          <div class="gbar-row">
+            <div class="gl">{{ROW_2_LBL}}</div>
+            <div class="gbar feb"><div class="barwrap"><div class="track"></div><div class="fill" data-w="{{ROW_2_PREV_PCT}}" style="--i:2"><span class="mtag">{{ROW_2_PREV_LBL}}</span></div></div><span class="vlbl">{{ROW_2_PREV_VAL}}</span></div>
+            <div class="gbar mar"><div class="barwrap"><div class="track"></div><div class="fill" data-w="{{ROW_2_CURR_PCT}}" style="--i:3"><span class="mtag">{{ROW_2_CURR_LBL}}</span></div></div><span class="vlbl">{{ROW_2_CURR_VAL}}<span class="delta">{{ROW_2_DELTA}}</span></span></div>
+          </div>
+          <div class="gbar-row">
+            <div class="gl">{{ROW_3_LBL}}</div>
+            <div class="gbar feb"><div class="barwrap"><div class="track"></div><div class="fill" data-w="{{ROW_3_PREV_PCT}}" style="--i:4"><span class="mtag">{{ROW_3_PREV_LBL}}</span></div></div><span class="vlbl">{{ROW_3_PREV_VAL}}</span></div>
+            <div class="gbar mar"><div class="barwrap"><div class="track"></div><div class="fill" data-w="{{ROW_3_CURR_PCT}}" style="--i:5"><span class="mtag">{{ROW_3_CURR_LBL}}</span></div></div><span class="vlbl">{{ROW_3_CURR_VAL}}<span class="delta">{{ROW_3_DELTA}}</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot"><span></span><span>-- / --</span></div>
+  </div>
+</section>
